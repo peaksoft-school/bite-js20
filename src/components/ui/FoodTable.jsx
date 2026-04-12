@@ -77,18 +77,22 @@ const initialFoods = [
 export default function FoodTable() {
   const [foods, setFoods] = useState(initialFoods)
 
-  const deleteFood = (id) => setFoods((prev) => prev.filter((f) => f.id !== id))
-  const toggleStock = (id) =>
+  const deleteFood = (id) => {
+    setFoods((prev) => prev.filter((f) => f.id !== id))
+  }
+
+  const toggleStock = (id) => {
     setFoods((prev) => prev.map((f) => (f.id === id ? { ...f, inStock: !f.inStock } : f)))
+  }
 
   return (
-    <TableContainer sx={{ borderRadius: 1, boxShadow: '0 1px 4px rgba(0,0,0,0.1)' }}>
+    <StyledTableContainer>
       <Table>
-        <TableHead size="small">
+        <TableHead>
           <TableRow>
             <HeaderCell padding="checkbox" />
             <HeaderCell>Товар</HeaderCell>
-            <HeaderCell sx={{ textAlign: 'left' }}>Название товара</HeaderCell>
+            <HeaderCell align="left">Название товара</HeaderCell>
             <HeaderCell>Цена</HeaderCell>
             <HeaderCell>Статус</HeaderCell>
             <HeaderCell>Прочие</HeaderCell>
@@ -100,24 +104,20 @@ export default function FoodTable() {
           {foods.map((food, index) => (
             <BodyRow key={food.id} index={index}>
               <BodyCell padding="checkbox">
-                <Checkbox size="small" sx={{ '&.Mui-checked': { color: '#cc2222' } }} />
+                <StyledCheckbox size="small" />
               </BodyCell>
 
               <BodyCell>
                 <FoodImage src={food.img} alt={food.name} />
               </BodyCell>
 
-              <BodyCell sx={{ textAlign: 'left' }}>{food.name}</BodyCell>
+              <NameCell>{food.name}</NameCell>
 
               <BodyCell>
                 {food.oldPrice ? (
                   <Box>
-                    <Typography fontSize={14} fontWeight={600} color="#e67e00">
-                      {food.price} сом
-                    </Typography>
-                    <Typography fontSize={12} color="#999" sx={{ textDecoration: 'line-through' }}>
-                      {food.oldPrice} сом
-                    </Typography>
+                    <NewPrice>{food.price} сом</NewPrice>
+                    <OldPrice>{food.oldPrice} сом</OldPrice>
                   </Box>
                 ) : (
                   `${food.price} сом`
@@ -127,38 +127,40 @@ export default function FoodTable() {
               <BodyCell>
                 <StatusText instock={String(food.inStock)} onClick={() => toggleStock(food.id)}>
                   {food.inStock ? 'В наличии' : 'Нет в наличии'}
-                  <p style={{ marginBottom: '5px', marginLeft: '5px' }}>⌄</p>
+                  <Arrow>⌄</Arrow>
                 </StatusText>
               </BodyCell>
 
               <BodyCell>
                 <CompositionBtn>
                   Состав продукта
-                  <p style={{ marginBottom: '5px', marginLeft: '5px' }}>⌄</p>
+                  <Arrow>⌄</Arrow>
                 </CompositionBtn>
               </BodyCell>
 
               <BodyCell>
-                <Box display="flex" justifyContent="center" gap={1}>
-                  <IconButton
-                    size="small"
-                    onClick={() => deleteFood(food.id)}
-                    sx={{ color: '#bbb', '&:hover': { color: '#cc2222' } }}
-                  >
-                    <img src={deleteIcon} alt="Delete" fontSize="small" />
-                  </IconButton>
-                  <IconButton size="small" sx={{ color: '#bbb', '&:hover': { color: '#2255cc' } }}>
-                    <img src={editIcon} alt="Edit" fontSize="small" />
-                  </IconButton>
-                </Box>
+                <Actions>
+                  <DeleteBtn size="small" onClick={() => deleteFood(food.id)}>
+                    <img src={deleteIcon} alt="Delete" />
+                  </DeleteBtn>
+
+                  <EditBtn size="small">
+                    <img src={editIcon} alt="Edit" />
+                  </EditBtn>
+                </Actions>
               </BodyCell>
             </BodyRow>
           ))}
         </TableBody>
       </Table>
-    </TableContainer>
+    </StyledTableContainer>
   )
 }
+
+const StyledTableContainer = styled(TableContainer)({
+  borderRadius: 8,
+  boxShadow: '0 1px 4px rgba(0,0,0,0.1)',
+})
 
 const HeaderCell = styled(TableCell)({
   background: '#cc2222',
@@ -182,18 +184,39 @@ const BodyCell = styled(TableCell)({
   fontSize: 14,
 })
 
+const NameCell = styled(BodyCell)({
+  textAlign: 'left',
+})
+
+const StyledCheckbox = styled(Checkbox)({
+  '&.Mui-checked': {
+    color: '#cc2222',
+  },
+})
+
 const FoodImage = styled('img')({
   width: 80,
   height: 60,
   objectFit: 'cover',
   borderRadius: 6,
-  display: 'block',
+})
+
+const NewPrice = styled(Typography)({
+  fontSize: 14,
+  fontWeight: 600,
+  color: '#e67e00',
+})
+
+const OldPrice = styled(Typography)({
+  fontSize: 12,
+  color: '#999',
+  textDecoration: 'line-through',
 })
 
 const StatusText = styled(Typography)(({ instock }) => ({
   display: 'inline-flex',
   alignItems: 'center',
-  gap: 2,
+  gap: 4,
   fontSize: 13,
   fontWeight: 500,
   cursor: 'pointer',
@@ -203,8 +226,32 @@ const StatusText = styled(Typography)(({ instock }) => ({
 const CompositionBtn = styled(Box)({
   display: 'inline-flex',
   alignItems: 'center',
-  gap: 2,
+  gap: 4,
   fontSize: 13,
-  color: '#333',
   cursor: 'pointer',
+})
+
+const Actions = styled(Box)({
+  display: 'flex',
+  justifyContent: 'center',
+  gap: 8,
+})
+
+const DeleteBtn = styled(IconButton)({
+  color: '#bbb',
+  '&:hover': {
+    color: '#cc2222',
+  },
+})
+
+const EditBtn = styled(IconButton)({
+  color: '#bbb',
+  '&:hover': {
+    color: '#2255cc',
+  },
+})
+
+const Arrow = styled('span')({
+  marginLeft: 4,
+  marginBottom: 7,
 })
