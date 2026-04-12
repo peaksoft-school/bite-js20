@@ -1,2 +1,1 @@
-export const App = () => <h1>Bite</h1>
-
+export const App =  () => <h1>Bite</h1>
