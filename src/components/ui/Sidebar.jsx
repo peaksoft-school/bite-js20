@@ -2,18 +2,20 @@ import { useState } from 'react'
 import { styled } from '@mui/material/styles'
 import { List, ListItemButton, ListItemIcon, ListItemText, Box, Collapse } from '@mui/material'
 
-import BannersIcon from '../../assets/icons/svgs/banners.svg'
-import CategoriesIcon from '../../assets/icons/svgs/categories.svg'
-import DishesIcon from '../../assets/icons/svgs/dishes.svg'
-import EstablishmentsIcon from '../../assets/icons/svgs/establishments.svg'
-import HomePageIcon from '../../assets/icons/svgs/home-page.svg'
-import LogoIcon from '../../assets/icons/svgs/logo.svg'
-import OrdersIcon from '../../assets/icons/svgs/orders.svg'
-import ReviewsIcon from '../../assets/icons/svgs/reviews.svg'
-import SettingsIcon from '../../assets/icons/svgs/settings.svg'
-import IconamoonIcon from '../../assets/icons/svgs/iconamoon_discount-fill.svg'
-import ModerationIcon from '../../assets/icons/svgs/moderation.svg'
-import AvatarIcon from '../../assets/icons/svgs/avatar.svg'
+import {
+  AvatarIcon,
+  BannersIcon,
+  CategoriesIcon,
+  OrdersIcon,
+  DishesIcon,
+  LogoIcon,
+  EstablishmentsIcon,
+  HomePageIcon,
+  ReviewsIcon,
+  IconamoonIcon,
+  ModerationIcon,
+  SettingsIcon,
+} from '../../assets/icons/index'
 
 const adminMenu = [
   { text: 'Главная', icon: <Box component="img" src={HomePageIcon} alt="homepage" /> },
