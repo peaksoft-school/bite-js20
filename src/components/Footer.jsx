@@ -1,10 +1,4 @@
-import Box from '@mui/material/Box'
-import Container from '@mui/material/Container'
-import Grid from '@mui/material/Grid'
-import Typography from '@mui/material/Typography'
-import Link from '@mui/material/Link'
-import IconButton from '@mui/material/IconButton'
-import { styled } from '@mui/material/styles'
+import { Box, Container, Grid, Typography, Link, IconButton, styled } from '@mui/material'
 import { InstagramIcon, YoutubeIcon } from '../../assets/icons/index.js'
 
 const footerLinks = {
