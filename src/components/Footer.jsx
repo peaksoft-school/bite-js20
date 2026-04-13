@@ -10,74 +10,74 @@ const legalLinks = ['Положение и условия', 'Политика к
 
 export default function Footer() {
   return (
-    <FooterWrapper component="footer">
+    <StyledFooterWrapper component="footer">
       <Container maxWidth="xl" disableGutters>
         <Grid container spacing={4} alignItems="flex-start">
           {Object.entries(footerLinks).map(([title, links]) => (
             <Grid item xs={12} sm={6} md={title === 'Информация об компании' ? 5 : 3} key={title}>
-              <FooterTitle variant="subtitle1">{title}</FooterTitle>
+              <StyledFooterTitle variant="subtitle1">{title}</StyledFooterTitle>
 
               <Grid container>
                 {title === 'Информация об компании' ? (
                   <>
                     <Grid item xs={6}>
                       {links.map((link) => (
-                        <FooterLink key={link} href="#">
+                        <StyledFooterLink key={link} href="#">
                           {link}
-                        </FooterLink>
+                        </StyledFooterLink>
                       ))}
                     </Grid>
                     <Grid item xs={6}>
                       {legalLinks.map((link) => (
-                        <FooterLink key={link} href="#">
+                        <StyledFooterLink key={link} href="#">
                           {link}
-                        </FooterLink>
+                        </StyledFooterLink>
                       ))}
                     </Grid>
                   </>
                 ) : (
                   <Grid item xs={12}>
                     {links.map((link) => (
-                      <FooterLink key={link} href="#">
+                      <StyledFooterLink key={link} href="#">
                         {link}
-                      </FooterLink>
+                      </StyledFooterLink>
                     ))}
                   </Grid>
-                                )}
+                )}
               </Grid>
             </Grid>
           ))}
 
           <Grid item xs={12} md="auto">
-            <SocialColumn>
-              <SocialButton href="#">
-                <SocialIcon src={InstagramIcon} alt="instagram" />
-              </SocialButton>
+            <StyledSocialColumn>
+              <StyledSocialButton href="#">
+                <StyledSocialIcon src={InstagramIcon} alt="instagram" />
+              </StyledSocialButton>
 
-              <SocialButton href="#">
-                <SocialIcon src={YoutubeIcon} alt="youtube" />
-              </SocialButton>
-            </SocialColumn>
+              <StyledSocialButton href="#">
+                <StyledSocialIcon src={YoutubeIcon} alt="youtube" />
+              </StyledSocialButton>
+            </StyledSocialColumn>
           </Grid>
         </Grid>
       </Container>
-    </FooterWrapper>
+    </StyledFooterWrapper>
   )
 }
 
-const FooterWrapper = styled(Box)({
+const StyledFooterWrapper = styled(Box)({
   backgroundColor: '#cc0000',
   padding: '40px 48px',
 })
 
-const FooterTitle = styled(Typography)({
+const StyledFooterTitle = styled(Typography)({
   color: '#ffffff',
   fontWeight: '700 !important',
   fontSize: '15px !important',
   marginBottom: '16px !important',
 })
 
-const FooterLink = styled(Link)({
+const StyledFooterLink = styled(Link)({
   color: 'rgba(255, 255, 255, 0.85) !important',
   fontSize: '14px !important',
   display: 'block !important',
@@ -89,7 +89,7 @@ const FooterLink = styled(Link)({
   },
 })
 
-const SocialColumn = styled(Box)({
+const StyledSocialColumn = styled(Box)({
   display: 'flex',
   flexDirection: 'column',
   gap: '16px',
@@ -97,7 +97,7 @@ const SocialColumn = styled(Box)({
   marginLeft: 'auto',
 })
 
-const SocialButton = styled(IconButton)({
+const StyledSocialButton = styled(IconButton)({
   border: '2px solid rgba(255, 255, 255, 0.7) !important',
   borderRadius: '8px !important',
   color: '#ffffff !important',
@@ -108,7 +108,7 @@ const SocialButton = styled(IconButton)({
   },
 })
 
-const SocialIcon = styled('img')({
+const StyledSocialIcon = styled('img')({
   width: '20px',
   height: '20px',
 })
