@@ -49,71 +49,71 @@ export const Sidebar = ({ role = 'admin', active, onChange, props }) => {
   const menu = role === 'admin' ? adminMenu : userMenu
 
   return (
-    <SidebarWrapper>
-      <Header>
-        <Div>
-          <Avatar>{props}</Avatar>
+    <StyleSidebarWrapper>
+      <StyleHeader>
+        <StyleDiv>
+          <StyleAvatar>{props}</StyleAvatar>
           <Box component="img" src={AvatarIcon} alt="logo" />
-        </Div>
-        <Logo src={LogoIcon} alt="logo" />
-      </Header>
+        </StyleDiv>
+        <StyleLogo src={LogoIcon} alt="logo" />
+      </StyleHeader>
 
       <List>
         {menu.map((item) => (
-          <MenuItem
+          <StyleMenuItem
             key={item.text}
             active={active === item.text ? 1 : 0}
             onClick={() => onChange(item.text)}
           >
             <ListItemIcon>{item.icon}</ListItemIcon>
             <ListItemText primary={item.text} />
-          </MenuItem>
+          </StyleMenuItem>
         ))}
 
         {role === 'admin' && (
           <>
-            <MenuItem onClick={() => setOpen(!open)}>
+            <StyleMenuItem onClick={() => setOpen(!open)}>
               <ListItemIcon>
                 <Box component="img" src={ModerationIcon} alt="moderation" />
               </ListItemIcon>
               <ListItemText primary="Модерация" />
-              <RotateIcon src={AvatarIcon} open={open ? 1 : 0} />
-            </MenuItem>
+              <StyleRotateIcon src={AvatarIcon} open={open ? 1 : 0} />
+            </StyleMenuItem>
 
             <Collapse in={open} timeout="auto" unmountOnExit>
               <List>
                 {moderationChildren.map((item) => (
-                  <SubItem
+                  <StyleSubItem
                     key={item.text}
                     active={active === item.text ? 1 : 0}
                     onClick={() => onChange(item.text)}
                   >
                     <ListItemIcon>{item.icon}</ListItemIcon>
                     <ListItemText primary={item.text} />
-                  </SubItem>
+                  </StyleSubItem>
                 ))}
               </List>
             </Collapse>
           </>
         )}
       </List>
-    </SidebarWrapper>
+    </StyleSidebarWrapper>
   )
 }
 
-const SidebarWrapper = styled(Box)({
+const StyleSidebarWrapper = styled(Box)({
   width: '280px',
   height: '100vh',
   backgroundColor: '#F5F4F2',
 })
 
-const Header = styled(Box)({
+const StyleHeader = styled(Box)({
   display: 'flex',
   alignItems: 'center',
   borderBottom: '1px solid #BDBDBD',
 })
 
-const MenuItem = styled(ListItemButton)(({ active }) => ({
+const StyleMenuItem = styled(ListItemButton)(({ active }) => ({
   marginTop: '40px',
   paddingLeft: '20px',
 
@@ -124,14 +124,13 @@ const MenuItem = styled(ListItemButton)(({ active }) => ({
   ...(active && {
     backgroundColor: '#FFD600',
   }),
-
 }))
 
-const SubItem = styled(ListItemButton)(({ active }) => ({
+const StyleSubItem = styled(ListItemButton)(({ active }) => ({
   paddingLeft: '60px',
   marginTop: '30px',
-  MozBorderRadiusTopleft: '18px',
-  MozBorderRadiusBottomleft: '18px',
+  borderTopLeftRadius: '18px',
+  borderBottomLeftRadius: '18px',
 
   '&:hover': {
     backgroundColor: '#FFD600',
@@ -140,16 +139,15 @@ const SubItem = styled(ListItemButton)(({ active }) => ({
   ...(active && {
     backgroundColor: '#FFD600',
   }),
-
 }))
 
-const RotateIcon = styled('img')(({ open }) => ({
+const StyleRotateIcon = styled('img')(({ open }) => ({
   marginLeft: '80px',
   transition: '0.3s',
   transform: open ? 'rotate(180deg)' : 'rotate(0deg)',
 }))
 
-const Avatar = styled(Box)({
+const StyleAvatar = styled(Box)({
   width: '34px',
   height: '34px',
   borderRadius: '10px',
@@ -159,13 +157,13 @@ const Avatar = styled(Box)({
   justifyContent: 'center',
 })
 
-const Logo = styled('img')({
+const StyleLogo = styled('img')({
   display: 'flex',
   width: '80px',
   height: '42px',
 })
 
-const Div = styled(Box)({
+const StyleDiv = styled(Box)({
   display: 'flex',
   gap: '4px',
   margin: '20px 60px 18px 20px',
