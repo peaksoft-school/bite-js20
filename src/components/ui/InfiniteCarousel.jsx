@@ -17,7 +17,7 @@ export const InfiniteCarousel = ({ data, speed = 5000 }) => {
   const displayData = data.length < 4 ? [...data, ...data, ...data, ...data] : data
 
   return (
-    <StyleOuterContainer>
+    <StyledOuterContainer>
       <StyledArrow className="left" onClick={handlePrev} disableRipple>
         <img src={LeftArrowIcon} alt="prev" />
       </StyledArrow>
@@ -26,39 +26,39 @@ export const InfiniteCarousel = ({ data, speed = 5000 }) => {
         <img src={RightArrowIcon} alt="next" />
       </StyledArrow>
 
-      <StyleViewport ref={emblaRef}>
-        <StyleWrapper>
+      <StyledViewport ref={emblaRef}>
+        <StyledWrapper>
           {displayData.map((item, index) => (
-            <StyleImageBox key={`${item.id}-${index}`}>
-              <StyleImage src={item.image} alt="" />
-            </StyleImageBox>
+            <StyledImageBox key={`${item.id}-${index}`}>
+              <StyledImage src={item.image} alt="" />
+            </StyledImageBox>
           ))}
-        </StyleWrapper>
-      </StyleViewport>
-    </StyleOuterContainer>
+        </StyledWrapper>
+      </StyledViewport>
+    </StyledOuterContainer>
   )
 }
 
-const StyleOuterContainer = styled(Box)({
+const StyledOuterContainer = styled(Box)({
   position: 'relative',
   width: '100%',
   margin: '20px 0 0',
 })
 
-const StyleViewport = styled(Box)({
+const StyledViewport = styled(Box)({
   overflow: 'hidden',
 })
 
-const StyleWrapper = styled(Box)({
+const StyledWrapper = styled(Box)({
   display: 'flex',
 })
 
-const StyleImageBox = styled(Box)({
+const StyledImageBox = styled(Box)({
   flex: '0 0 auto',
   paddingLeft: '20px',
 })
 
-const StyleImage = styled('img')({
+const StyledImage = styled('img')({
   width: '555px',
   height: '152px',
   borderRadius: '10px',
