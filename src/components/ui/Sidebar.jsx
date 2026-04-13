@@ -130,9 +130,8 @@ const MenuItem = styled(ListItemButton)(({ active }) => ({
 const SubItem = styled(ListItemButton)(({ active }) => ({
   paddingLeft: '60px',
   marginTop: '30px',
-  borderRadius:
-  // MozBorderRadiusTopleft: '18px',
-  // MozBorderRadiusBottomleft: '18px',
+  MozBorderRadiusTopleft: '18px',
+  MozBorderRadiusBottomleft: '18px',
 
   '&:hover': {
     backgroundColor: '#FFD600',
