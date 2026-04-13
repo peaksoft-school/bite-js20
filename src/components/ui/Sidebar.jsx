@@ -120,21 +120,28 @@ const MenuItem = styled(ListItemButton)(({ active }) => ({
   '&:hover': {
     backgroundColor: '#FFD600',
   },
+
   ...(active && {
     backgroundColor: '#FFD600',
   }),
+
 }))
 
 const SubItem = styled(ListItemButton)(({ active }) => ({
   paddingLeft: '60px',
   marginTop: '30px',
+  borderRadius:
+  // MozBorderRadiusTopleft: '18px',
+  // MozBorderRadiusBottomleft: '18px',
 
   '&:hover': {
     backgroundColor: '#FFD600',
   },
+
   ...(active && {
     backgroundColor: '#FFD600',
   }),
+
 }))
 
 const RotateIcon = styled('img')(({ open }) => ({
