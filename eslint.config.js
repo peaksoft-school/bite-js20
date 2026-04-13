@@ -56,7 +56,7 @@ export default [
 
       // Хуки
       'react-hooks/rules-of-hooks': 'error',
-      'react-hooks/exhaustive-deps': 'warn', // warn вместо off — полезно знать
+      'react-hooks/exhaustive-deps': 'warn',
 
       // Доступность
       'jsx-a11y/label-has-associated-control': [

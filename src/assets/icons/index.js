@@ -1,5 +1,5 @@
 import AboutIcon from './svgs/about.svg'
-import AddImageIcon from './svgs/add-image.svg'
+import AddImageIcon from './svgs/add-Image.svg'
 import AppleIcon from './svgs/apple.svg'
 import AttentionIcon from './svgs/attention.svg'
 import BagIcon from './svgs/bag.svg'
@@ -33,6 +33,7 @@ import LogoIcon from './svgs/logo.svg'
 import MagnifierIcon from './svgs/magnifier.svg'
 import MapIcon from './svgs/map.svg'
 import ModerationIcon from './svgs/moderation.svg'
+import SaveFillIcon from './svgs/save-fill-icon.svg'
 import NoteIcon from './svgs/note.svg'
 import OrdersIcon from './svgs/orders.svg'
 import PencilSquareIcon from './svgs/pencil-square.svg'
@@ -87,6 +88,7 @@ export {
   MagnifierIcon,
   MapIcon,
   ModerationIcon,
+  SaveFillIcon,
   NoteIcon,
   OrdersIcon,
   PencilSquareIcon,
