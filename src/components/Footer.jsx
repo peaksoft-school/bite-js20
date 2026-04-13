@@ -43,7 +43,7 @@ export default function Footer() {
                       </FooterLink>
                     ))}
                   </Grid>
-                )}
+                                )}
               </Grid>
             </Grid>
           ))}
@@ -53,6 +53,7 @@ export default function Footer() {
               <SocialButton href="#">
                 <SocialIcon src={InstagramIcon} alt="instagram" />
               </SocialButton>
+
               <SocialButton href="#">
                 <SocialIcon src={YoutubeIcon} alt="youtube" />
               </SocialButton>
