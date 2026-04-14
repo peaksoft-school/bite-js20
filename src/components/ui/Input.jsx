@@ -1,4 +1,4 @@
-import { InputBase, styled } from '@mui/material'
+import { InputBase, styled, Typography } from '@mui/material'
 
 export const Input = ({
   id,
@@ -12,10 +12,11 @@ export const Input = ({
   onChange,
   ...props
 }) => (
-  <div id="12">
+  <div>
     {label && <label htmlFor={id}>{label}</label>}
 
     <StyledInput
+      id={id}
       type={type}
       placeholder={placeholder}
       error={error}
@@ -25,7 +26,11 @@ export const Input = ({
       {...props}
     />
 
-    {helperText && <HelperText component="span">{helperText}</HelperText>}
+    {helperText && (
+      <HelperText component="span" isError={error}>
+        {helperText}
+      </HelperText>
+    )}
   </div>
 )
 
@@ -79,9 +84,13 @@ const StyledInput = styled(InputBase)(({ theme }) => {
   }
 })
 
-const HelperText = styled('span')(({ theme, error }) => ({
-  fontSize: '0.75rem',
-  marginTop: '0.25rem',
-  display: 'block',
-  color: error ? theme.palette.error.main : theme.palette.secondary.greyMid,
-}))
+const HelperText = styled(Typography)(({ theme, isError }) => {
+  const { secondary, error } = theme.palette
+
+  return {
+    fontSize: '0.75rem',
+    marginTop: '0.25rem',
+    display: 'block',
+    color: isError ? error.main : secondary.greyMid,
+  }
+})
