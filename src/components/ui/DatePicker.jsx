@@ -2,8 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import { Box, Typography, IconButton } from '@mui/material'
 import { styled } from '@mui/material/styles'
 
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+import { RightArrowIcon, LeftArrowIcon } from '../../assets/icons'
 
 const weekDays = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс']
 
@@ -78,7 +77,7 @@ export const DatePicker = () => {
         <StyleCalendar>
           <StyleHeader>
             <IconButton onClick={prevMonth}>
-              <ArrowBackIosNewIcon fontSize="small" />
+              <Box component={'img'} src={LeftArrowIcon} fontSize="small" />
             </IconButton>
 
             <Typography>
@@ -86,7 +85,7 @@ export const DatePicker = () => {
             </Typography>
 
             <IconButton onClick={nextMonth}>
-              <ArrowForwardIosIcon fontSize="small" />
+              <Box component={'img'} src={RightArrowIcon} fontSize="small" />
             </IconButton>
           </StyleHeader>
 
