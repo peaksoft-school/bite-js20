@@ -5,28 +5,46 @@ import { RegisterForm } from './RegisterForm'
 import { LogoIcon } from '../../assets/icons'
 import background from '../../assets/images/bite-background.png'
 import { useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+
+const motionProps = {
+  initial: { opacity: 0, y: 10 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -10 },
+  transition: { duration: 0.25 },
+}
 
 export const AuthPage = () => {
   const [isState, setIsStateAuth] = useState(true)
 
-  const openRegister = () => {
-    setIsStateAuth(false)
-  }
-
-  const openLogin = () => {
-    setIsStateAuth(true)
-  }
+  const toggleAuth = (value) => setIsStateAuth(value)
 
   return (
     <StyledBox>
-      <StyledBoxMain>
+      <StyledBoxMain isState={isState}>
         <StyledLogo src={LogoIcon} />
 
         <StyledAuthBtnBox>
-          <StyledButton onClick={openLogin} variant="error">Войти</StyledButton>
-          <StyledButton onClick={openRegister}>Регистрация</StyledButton>
+          <StyledButton onClick={() => toggleAuth(true)} active={isState}>
+            Войти
+          </StyledButton>
+
+          <StyledButton onClick={() => toggleAuth(false)} active={!isState}>
+            Регистрация
+          </StyledButton>
         </StyledAuthBtnBox>
-        {isState ? <LoginForm /> : <RegisterForm />}
+
+        <AnimatePresence mode="wait">
+          {isState ? (
+            <motion.div key="login" {...motionProps}>
+              <LoginForm />
+            </motion.div>
+          ) : (
+            <motion.div key="register" {...motionProps}>
+              <RegisterForm />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </StyledBoxMain>
     </StyledBox>
   )
@@ -51,18 +69,22 @@ const StyledBox = styled(Box)(({ theme }) => {
   }
 })
 
-const StyledBoxMain = styled(Box)(({ theme }) => {
+const StyledBoxMain = styled(Box, {
+  shouldForwardProp: (prop) => prop !== 'isState',
+})(({ theme, isState }) => {
   const { primary } = theme.palette
 
   return {
     width: '40rem',
-    height: '43rem',
+    height: isState ? '43rem' : '52rem',
     backgroundColor: primary.white,
     borderRadius: '10px',
 
     display: 'grid',
     alignContent: 'start',
     justifyItems: 'center',
+    transition: 'height 0.3s ease',
+    overflow: 'hidden',
   }
 })
 
@@ -83,15 +105,25 @@ const StyledAuthBtnBox = styled(Box)(({ theme }) => {
 
     display: 'flex',
     justifyContent: 'space-evenly',
-    alignItems: 'center'
+    alignItems: 'center',
   }
 })
 
-const StyledButton = styled(Button)(() => {
+const StyledButton = styled(Button, {
+  shouldForwardProp: (prop) => prop !== 'active',
+})(({ theme, active }) => {
+  const { primary } = theme.palette
+
   return {
     height: '3.5rem',
     padding: '10px 20px',
 
     fontSize: '2rem',
+
+    backgroundColor: active ? primary.white : 'transparent',
+    border: active ? `1px solid ${primary.black}` : 'none',
+    borderRadius: active ? '8px' : '0px',
+
+    transition: 'all 0.3s ease',
   }
 })
