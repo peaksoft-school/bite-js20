@@ -6,6 +6,7 @@ import {
   StyledGoogle,
   StyledButton,
   StyledInputWrapper,
+  StyledForgotPassword,
 } from './authStyles'
 
 export const LoginForm = () => {
@@ -64,6 +65,8 @@ export const LoginForm = () => {
       <StyledButton type="submit" variant="contained">
         Войти
       </StyledButton>
+
+      <StyledForgotPassword href="/forgot-password">Забыли пароль?</StyledForgotPassword>
     </StyledForm>
   )
 }
