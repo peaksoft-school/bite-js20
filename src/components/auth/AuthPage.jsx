@@ -1,27 +1,96 @@
 import { Box, styled } from '@mui/material'
+import { Button } from '../ui/Button'
 import { LoginForm } from './LoginForm'
 import { RegisterForm } from './RegisterForm'
+import { LogoIcon } from '../../assets/icons'
 import background from '../../assets/images/bite-background.png'
+import { useState } from 'react'
 
 export const AuthPage = () => {
+  const [isState, setIsStateAuth] = useState(true)
+
+  const openRegister = () => {
+    setIsStateAuth(false)
+  }
+
+  const openLogin = () => {
+    setIsStateAuth(true)
+  }
+
   return (
     <StyledBox>
-        <LoginForm />
-        <RegisterForm />
+      <StyledBoxMain>
+        <StyledLogo src={LogoIcon} />
+
+        <StyledAuthBtnBox>
+          <StyledButton onClick={openLogin}>Войти</StyledButton>
+          <StyledButton onClick={openRegister}>Регистрация</StyledButton>
+        </StyledAuthBtnBox>
+        {isState ? <LoginForm /> : <RegisterForm />}
+      </StyledBoxMain>
     </StyledBox>
   )
 }
 
-const StyledBox = styled(Box)({
-  width: "100vw",
-  height: "100vh",
+const StyledBox = styled(Box)(({ theme }) => {
+  const { error } = theme.palette
 
-  backgroundImage: `url(${background})`,
-  backgroundRepeat: 'no-repeat',
-  backgroundPosition: 'center',
-  backgroundSize: 'contain',
+  return {
+    width: '100vw',
+    height: '100vh',
 
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
+    backgroundImage: `url(${background})`,
+    backgroundColor: error.greyLight,
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+    backgroundSize: 'contain',
+
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
+})
+
+const StyledBoxMain = styled(Box)(({ theme }) => {
+  const { primary } = theme.palette
+
+  return {
+    width: '40rem',
+    height: '43rem',
+    backgroundColor: primary.white,
+    borderRadius: '10px',
+
+    display: 'grid',
+    alignContent: 'start',
+    justifyItems: 'center',
+  }
+})
+
+const StyledLogo = styled('img')({
+  width: '8.75rem',
+  marginTop: '3.75rem',
+})
+
+const StyledAuthBtnBox = styled(Box)(({ theme }) => {
+  const { error } = theme.palette
+
+  return {
+    width: '28rem',
+    height: '5.313rem',
+    borderRadius: '10px',
+    backgroundColor: error.greyLight,
+
+    display: 'flex',
+    justifyContent: 'center',
+  }
+})
+
+const StyledButton = styled(Button)(() => {
+  return {
+    width: '9.375rem',
+    height: '3.5rem',
+    padding: '10px 20px',
+
+    fontSize: '1.9rem',
+  }
 })
