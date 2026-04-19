@@ -1,4 +1,4 @@
-import { IconButton, keyframes, styled, TextField } from '@mui/material'
+import { Box, IconButton, keyframes, styled, TextField } from '@mui/material'
 import { Button } from '../ui/Button'
 import { GoogleIcon } from '../../assets/icons'
 import { useForm } from 'react-hook-form'
@@ -21,44 +21,50 @@ export const LoginForm = () => {
     formState: { errors },
   } = useForm()
 
-  const submitHandler = (data) => {}
+  const submitHandler = (data) => {
+    console.log(data); // я оставил это чтобы зоглушил ошибку до соеднение сервером (API)
+  }
 
   return (
     <StyledForm onSubmit={handleSubmit(submitHandler)}>
-      <StyledInputMUI
-        type="email"
-        placeholder="Email"
-        autoComplete="email"
-        {...register('email', {
-          required: 'Введите email',
-          pattern: {
-            value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-            message: 'Некорректный email',
-          },
-        })}
-        error={Boolean(errors.email)}
-        helperText={errors.email?.message}
-      />
+      <StyledInputWrapper>
+        <StyledInputMUI
+          type="email"
+          placeholder="Email"
+          autoComplete="email"
+          {...register('email', {
+            required: 'Введите email',
+            pattern: {
+              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+              message: 'Некорректный email',
+            },
+          })}
+          error={Boolean(errors.email)}
+          helperText={errors.email?.message}
+        />
+      </StyledInputWrapper>
 
-      <StyledInputMUI
-        type="password"
-        placeholder="Пароль"
-        autoComplete="current-password"
-        {...register('password', {
-          required: 'Введите пароль',
-          minLength: { value: 8, message: 'Минимум 8 символов' },
-          validate: {
-            hasLetter: (v) => /[a-zA-Z]/.test(v) || 'Пароль должен содержать латинскую букву',
-            hasNumber: (v) => /\d/.test(v) || 'Пароль должен содержать цифру',
-            onlyAllowed: (v) => /^[a-zA-Z\d]+$/.test(v) || 'Только латиница и цифры',
-          },
-        })}
-        error={Boolean(errors.password)}
-        helperText={errors.password?.message}
-      />
+      <StyledInputWrapper>
+        <StyledInputMUI
+          type="password"
+          placeholder="Пароль"
+          autoComplete="current-password"
+          {...register('password', {
+            required: 'Введите пароль',
+            minLength: { value: 8, message: 'Минимум 8 символов' },
+            validate: {
+              hasLetter: (v) => /[a-zA-Z]/.test(v) || 'Пароль должен содержать латинскую букву',
+              hasNumber: (v) => /\d/.test(v) || 'Пароль должен содержать цифру',
+              onlyAllowed: (v) => /^[a-zA-Z\d]+$/.test(v) || 'Только латиница и цифры',
+            },
+          })}
+          error={Boolean(errors.password)}
+          helperText={errors.password?.message}
+        />
+      </StyledInputWrapper>
 
       <StyledGoogle>
-        <img src={GoogleIcon} />
+        <img src={GoogleIcon} alt="Google"/>
       </StyledGoogle>
 
       <StyledButton type="submit" variant="contained">
@@ -99,7 +105,6 @@ const StyledInputMUI = styled(TextField)(({ theme }) => {
       height: '2.875rem',
       borderRadius: '0.5rem',
       backgroundColor: primary.white,
-      fontFamily: 'Helvetica',
       fontWeight: '400',
       fontSize: '1rem',
 
@@ -151,9 +156,13 @@ const StyledButton = styled(Button)(() => {
     height: '3.125rem',
     marginTop: '1.25rem',
 
-    fontFamily: 'Helvetica',
     fontWeight: '700',
     fontSize: '24px',
     lineHeight: '100%',
   }
+})
+
+const StyledInputWrapper = styled(Box)({
+  width: '100%',
+  minHeight: '4rem',
 })
