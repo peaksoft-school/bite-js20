@@ -65,3 +65,16 @@ export const StyledButton = styled(Button)({
   fontSize: '24px',
   lineHeight: '100%',
 })
+
+export const StyledForgotPassword = styled('a')(({ theme }) => ({
+  height: '1.125rem',
+
+  color: theme.palette.primary.black,
+  fontSize: '0.875rem',
+  fontFamily: 'Helvetica',
+  fontWeight: '400',
+  cursor: 'pointer',
+  textDecoration: 'none',
+  lineHeight: '100%',
+  letterSpacing: '0%',
+}))
