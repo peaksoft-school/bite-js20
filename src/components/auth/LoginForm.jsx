@@ -1,18 +1,12 @@
-import { Box, IconButton, keyframes, styled, TextField } from '@mui/material'
-import { Button } from '../ui/Button'
 import { GoogleIcon } from '../../assets/icons'
 import { useForm } from 'react-hook-form'
-
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(-5px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0px);
-  }
-`
+import {
+  StyledForm,
+  StyledInputMUI,
+  StyledGoogle,
+  StyledButton,
+  StyledInputWrapper,
+} from './authStyles'
 
 export const LoginForm = () => {
   const {
@@ -22,7 +16,7 @@ export const LoginForm = () => {
   } = useForm()
 
   const submitHandler = (data) => {
-    console.log(data); // я оставил это чтобы зоглушил ошибку до соеднение сервером (API)
+    console.log(data) // я оставил это чтобы зоглушил ошибку до соеднение сервером (API)
   }
 
   return (
@@ -64,7 +58,7 @@ export const LoginForm = () => {
       </StyledInputWrapper>
 
       <StyledGoogle>
-        <img src={GoogleIcon} alt="Google"/>
+        <img src={GoogleIcon} alt="Google" />
       </StyledGoogle>
 
       <StyledButton type="submit" variant="contained">
@@ -73,96 +67,3 @@ export const LoginForm = () => {
     </StyledForm>
   )
 }
-
-const StyledForm = styled('form')({
-  margin: '2.5rem 0 1.25rem',
-  width: '26rem',
-
-  display: 'grid',
-  justifyItems: 'center',
-  gap: '1.25rem',
-})
-
-const StyledInputMUI = styled(TextField)(({ theme }) => {
-  const { primary, secondary, error } = theme.palette
-
-  return {
-    width: '100%',
-
-    '& .MuiInputLabel-root': {
-      color: secondary.greyMid,
-
-      '&.Mui-focused': {
-        color: primary.black,
-      },
-
-      '&.Mui-error': {
-        color: error.main,
-      },
-    },
-
-    '& .MuiOutlinedInput-root': {
-      height: '2.875rem',
-      borderRadius: '0.5rem',
-      backgroundColor: primary.white,
-      fontWeight: '400',
-      fontSize: '1rem',
-
-      '& fieldset': {
-        border: `1px solid ${secondary.greyMid}`,
-      },
-
-      '&:hover fieldset': {
-        border: `1px solid ${primary.black}`,
-      },
-
-      '&.Mui-focused fieldset': {
-        border: `1px solid ${primary.black}`,
-      },
-
-      '&.Mui-error fieldset': {
-        border: `1px solid ${error.main}`,
-      },
-    },
-
-    '& .MuiInputBase-input': {
-      padding: '0.5rem 1.25rem',
-      color: primary.black,
-
-      '&::placeholder': {
-        color: secondary.greyMid,
-        opacity: 1,
-      },
-    },
-
-    '& .MuiFormHelperText-root.Mui-error': {
-      animation: `${fadeIn} 0.4s ease-out`,
-      lineHeight: 'normal',
-    },
-  }
-})
-
-const StyledGoogle = styled(IconButton)(() => {
-  return {
-    width: '28px',
-    height: '28px',
-    opacity: '1',
-  }
-})
-
-const StyledButton = styled(Button)(() => {
-  return {
-    width: '100%',
-    height: '3.125rem',
-    marginTop: '1.25rem',
-
-    fontWeight: '700',
-    fontSize: '24px',
-    lineHeight: '100%',
-  }
-})
-
-const StyledInputWrapper = styled(Box)({
-  width: '100%',
-  minHeight: '4rem',
-})
