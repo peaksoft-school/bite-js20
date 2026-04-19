@@ -23,7 +23,7 @@ export const AuthPage = () => {
         <StyledLogo src={LogoIcon} />
 
         <StyledAuthBtnBox>
-          <StyledButton onClick={openLogin}>Войти</StyledButton>
+          <StyledButton onClick={openLogin} variant="error">Войти</StyledButton>
           <StyledButton onClick={openRegister}>Регистрация</StyledButton>
         </StyledAuthBtnBox>
         {isState ? <LoginForm /> : <RegisterForm />}
@@ -75,22 +75,23 @@ const StyledAuthBtnBox = styled(Box)(({ theme }) => {
   const { error } = theme.palette
 
   return {
+    marginTop: '60px',
     width: '28rem',
     height: '5.313rem',
     borderRadius: '10px',
     backgroundColor: error.greyLight,
 
     display: 'flex',
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
+    alignItems: 'center'
   }
 })
 
 const StyledButton = styled(Button)(() => {
   return {
-    width: '9.375rem',
     height: '3.5rem',
     padding: '10px 20px',
 
-    fontSize: '1.9rem',
+    fontSize: '2rem',
   }
 })
