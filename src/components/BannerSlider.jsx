@@ -1,55 +1,30 @@
-import { styled } from '@mui/material/styles'
-import { Box } from '@mui/material'
+import { styled, Box } from '@mui/material'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper/modules'
+import { BANNER_DATA } from '../utils/constants'
 import 'swiper/css'
 
-export const BannerSlider = () => {
-  const banners = [
-    {
-      id: 1,
-      image: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70',
-    },
-    {
-      id: 2,
-      image: 'https://images.unsplash.com/photo-1494976388531-d1058494cdd8',
-    },
-    {
-      id: 3,
-      image: 'https://images.unsplash.com/photo-1553440569-bcc63803a83d',
-    },
-    {
-      id: 4,
-      image: 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341',
-    },
-  ]
-
-  return (
-    <SliderWrapper>
-      <Swiper
-        modules={[Autoplay]}
-        slidesPerView={2}
-        spaceBetween={20}
-        loop={true}
-        speed={1200}
-        autoplay={{
-          delay: 3000,
-          disableOnInteraction: false,
-        }}
-      >
-        {banners.map((banner) => (
-          <SwiperSlide key={banner.id}>
-            <BannerCard
-              component="img"
-              src={banner.image}
-              alt={`banner-${banner.id}`}
-            />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </SliderWrapper>
-  )
-}
+export const BannerSlider = () => (
+  <SliderWrapper>
+    <Swiper
+      modules={[Autoplay]}
+      slidesPerView={2}
+      spaceBetween={20}
+      loop={true}
+      speed={1200}
+      autoplay={{
+        delay: 3000,
+        disableOnInteraction: false,
+      }}
+    >
+      {BANNER_DATA.map((banner) => (
+        <SwiperSlide key={banner.id}>
+          <BannerCard component="img" src={banner.image} alt={`banner-${banner.id}`} />
+        </SwiperSlide>
+      ))}
+    </Swiper>
+  </SliderWrapper>
+)
 
 const SliderWrapper = styled(Box)({
   width: '100%',
