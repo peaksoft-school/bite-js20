@@ -4,7 +4,7 @@ import { LeftArrowIcon, RightArrowIcon } from '../../assets/icons'
 import Autoplay from 'embla-carousel-autoplay'
 import useEmblaCarousel from 'embla-carousel-react'
 
-export const InfiniteCarousel = ({ data, speed = 5000 }) => {
+export const Carousel = ({ data, speed = 5000 }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
     Autoplay({ delay: speed, stopOnInteraction: false }),
   ])
@@ -28,9 +28,9 @@ export const InfiniteCarousel = ({ data, speed = 5000 }) => {
 
       <StyledViewport ref={emblaRef}>
         <StyledWrapper>
-          {displayData.map((item, index) => (
-            <StyledImageBox key={`${item.id}-${index}`}>
-              <StyledImage src={item.image} alt="" />
+          {displayData.map(({ id, image }, i) => (
+            <StyledImageBox key={`${id}-${i}`}>
+              <StyledImage src={image} alt="" />
             </StyledImageBox>
           ))}
         </StyledWrapper>
