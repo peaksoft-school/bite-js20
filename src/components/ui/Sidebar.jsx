@@ -1,72 +1,38 @@
 import { useState } from 'react'
-import { styled } from '@mui/material/styles'
-import { List, ListItemButton, ListItemIcon, ListItemText, Box, Collapse } from '@mui/material'
-
 import {
-  AvatarIcon,
-  BannersIcon,
-  CategoriesIcon,
-  OrdersIcon,
-  DishesIcon,
-  LogoIcon,
-  EstablishmentsIcon,
-  HomePageIcon,
-  ReviewsIcon,
-  IconamoonIcon,
-  ModerationIcon,
-  SettingsIcon,
-} from '../../assets/icons/index'
-
-const adminMenu = [
-  { text: 'Главная', icon: <Box component="img" src={HomePageIcon} alt="homepage" /> },
-  { text: 'Заведения', icon: <Box component="img" src={EstablishmentsIcon} alt="establishment" /> },
-]
-
-const userMenu = [
-  { text: 'Главная', icon: <Box component="img" src={HomePageIcon} alt="homepage" /> },
-  {
-    text: 'Мои заведения',
-    icon: <Box component="img" src={EstablishmentsIcon} alt="establishment" />,
-  },
-  { text: 'Блюда', icon: <Box component="img" src={DishesIcon} alt="dishes" /> },
-  { text: 'Баннеры', icon: <Box component="img" src={BannersIcon} alt="banner" /> },
-  { text: 'Заказы', icon: <Box component="img" src={OrdersIcon} alt="order" /> },
-  { text: 'Категории', icon: <Box component="img" src={CategoriesIcon} alt="categorie" /> },
-  { text: 'Отзывы', icon: <Box component="img" src={ReviewsIcon} alt="review" /> },
-  { text: 'Настройки', icon: <Box component="img" src={SettingsIcon} alt="setting" /> },
-  { text: 'Промокод', icon: <Box component="img" src={IconamoonIcon} alt="iconamoon" /> },
-]
-
-const moderationChildren = [
-  { text: 'Баннеры', icon: <Box component="img" src={BannersIcon} alt="banner" /> },
-  { text: 'Отзывы', icon: <Box component="img" src={ReviewsIcon} alt="review" /> },
-  { text: 'Блюда', icon: <Box component="img" src={DishesIcon} alt="dishes" /> },
-]
+  List,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Box,
+  Collapse,
+  styled,
+} from '@mui/material'
+import { AvatarIcon, LogoIcon, ModerationIcon } from '../../assets/icons/index'
+import { SIDEBAR_ADMIN, SIDEBAR_ADMIN_MODARATION, SIDEBAR_VENDOR } from '../../utils/constants'
 
 export const Sidebar = ({ role = 'admin', active, onChange, props }) => {
   const [open, setOpen] = useState(false)
 
-  const menu = role === 'admin' ? adminMenu : userMenu
+  const menu = role === 'admin' ? SIDEBAR_ADMIN : SIDEBAR_VENDOR
 
   return (
     <StyleSidebarWrapper>
       <StyleHeader>
         <StyleDiv>
           <StyleAvatar>{props}</StyleAvatar>
+
           <Box component="img" src={AvatarIcon} alt="logo" />
         </StyleDiv>
+
         <StyleLogo src={LogoIcon} alt="logo" />
       </StyleHeader>
 
       <List>
-        {menu.map((item) => (
-          <StyleMenuItem
-            key={item.text}
-            active={active === item.text ? 1 : 0}
-            onClick={() => onChange(item.text)}
-          >
-            <ListItemIcon>{item.icon}</ListItemIcon>
-            <ListItemText primary={item.text} />
+        {menu.map(({ text, icon }) => (
+          <StyleMenuItem key={text} active={active === text ? 1 : 0} onClick={() => onChange(text)}>
+            <ListItemIcon>{icon}</ListItemIcon>
+            <ListItemText primary={text} />
           </StyleMenuItem>
         ))}
 
@@ -76,20 +42,21 @@ export const Sidebar = ({ role = 'admin', active, onChange, props }) => {
               <ListItemIcon>
                 <Box component="img" src={ModerationIcon} alt="moderation" />
               </ListItemIcon>
+
               <ListItemText primary="Модерация" />
               <StyleRotateIcon src={AvatarIcon} open={open ? 1 : 0} />
             </StyleMenuItem>
 
             <Collapse in={open} timeout="auto" unmountOnExit>
               <List>
-                {moderationChildren.map((item) => (
+                {SIDEBAR_ADMIN_MODARATION.map(({ text, icon }) => (
                   <StyleSubItem
-                    key={item.text}
-                    active={active === item.text ? 1 : 0}
-                    onClick={() => onChange(item.text)}
+                    key={text}
+                    active={active === text ? 1 : 0}
+                    onClick={() => onChange(text)}
                   >
-                    <ListItemIcon>{item.icon}</ListItemIcon>
-                    <ListItemText primary={item.text} />
+                    <ListItemIcon>{icon}</ListItemIcon>
+                    <ListItemText primary={text} />
                   </StyleSubItem>
                 ))}
               </List>
@@ -114,7 +81,7 @@ const StyleHeader = styled(Box)({
 })
 
 const StyleMenuItem = styled(ListItemButton)(({ active }) => ({
-  marginTop: '40px',
+  marginTop: '30px',
   paddingLeft: '20px',
 
   '&:hover': {
@@ -129,8 +96,6 @@ const StyleMenuItem = styled(ListItemButton)(({ active }) => ({
 const StyleSubItem = styled(ListItemButton)(({ active }) => ({
   paddingLeft: '60px',
   marginTop: '30px',
-  borderTopLeftRadius: '18px',
-  borderBottomLeftRadius: '18px',
 
   '&:hover': {
     backgroundColor: '#FFD600',
