@@ -1,1 +1,3 @@
-export const App = () => <h1>Bite</h1>
+import { AppRoutes } from "./routes/AppRoutes";
+
+export const App = () => <AppRoutes />
