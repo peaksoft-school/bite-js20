@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Box, Typography, styled } from '@mui/material'
-import { Button } from '../ui/Button'
+import { Button } from '../Button'
 
 export const UserCard = ({ item }) => {
   const { title, price, oldPrice, weight, image } = item
