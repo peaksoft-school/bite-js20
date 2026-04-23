@@ -6,8 +6,8 @@ import {
   BasketIcon,
   UserIcon,
   LogoIcon,
-} from '../../assets/icons'
-import { Button } from './Button'
+} from '../assets/icons'
+import { Button } from '../components/ui/Button'
 
 export const Header = ({ address = 'Укажите адрес', isAuth = false, cartCount = 0 }) => (
   <StyleHeaderWrapper>

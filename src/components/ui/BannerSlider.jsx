@@ -1,7 +1,7 @@
 import { styled, Box } from '@mui/material'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper/modules'
-import { BANNER_DATA } from '../utils/constants'
+import { BANNER_DATA } from '../../utils/constants'
 import 'swiper/css'
 
 export const BannerSlider = () => (
