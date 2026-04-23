@@ -12,78 +12,17 @@ import {
   Typography,
   Box,
 } from '@mui/material'
+
 import deleteIcon from '../../assets/icons/svgs/clean-basket.svg'
 import editIcon from '../../assets/icons/svgs/pencil-square.svg'
 
-const initialFoods = [
-  {
-    id: 1,
-    name: 'Картошка фри',
-    price: 100,
-    oldPrice: null,
-    inStock: true,
-    img: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=120&h=90&fit=crop',
-  },
-  {
-    id: 2,
-    name: 'Самсы с картошкой',
-    price: 130,
-    oldPrice: null,
-    inStock: true,
-    img: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=120&h=90&fit=crop',
-  },
-  {
-    id: 3,
-    name: 'Класический бургер',
-    price: 210,
-    oldPrice: null,
-    inStock: true,
-    img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=120&h=90&fit=crop',
-  },
-  {
-    id: 4,
-    name: 'Курица в панировке',
-    price: 320,
-    oldPrice: 400,
-    inStock: true,
-    img: 'https://images.unsplash.com/photo-1562967914-608f82629710?w=120&h=90&fit=crop',
-  },
-  {
-    id: 5,
-    name: 'Самсы с курицей',
-    price: 130,
-    oldPrice: null,
-    inStock: false,
-    img: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=120&h=90&fit=crop',
-  },
-  {
-    id: 6,
-    name: 'Самсы с сыром',
-    price: 130,
-    oldPrice: null,
-    inStock: true,
-    img: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=120&h=90&fit=crop',
-  },
-  {
-    id: 7,
-    name: 'Самсы с мясом',
-    price: 130,
-    oldPrice: null,
-    inStock: true,
-    img: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=120&h=90&fit=crop',
-  },
-]
-
-export default function FoodTable() {
+export default function FoodTable({ foods: initialFoods }) {
   const [foods, setFoods] = useState(initialFoods)
 
-  const deleteFood = (id) => {
-    setFoods((prev) => prev.filter((f) => f.id !== id))
-  }
+  const deleteFood = (id) => setFoods((prev) => prev.filter((f) => f.id !== id))
 
-  const toggleStock = (id) => {
+  const toggleStock = (id) =>
     setFoods((prev) => prev.map((f) => (f.id === id ? { ...f, inStock: !f.inStock } : f)))
-  }
 
   return (
     <StyledTableContainer>
@@ -125,7 +64,7 @@ export default function FoodTable() {
               </BodyCell>
 
               <BodyCell>
-                <StatusText instock={String(food.inStock)} onClick={() => toggleStock(food.id)}>
+                <StatusText instock={food.inStock} onClick={() => toggleStock(food.id)}>
                   {food.inStock ? 'В наличии' : 'Нет в наличии'}
                   <Arrow>⌄</Arrow>
                 </StatusText>
@@ -140,12 +79,12 @@ export default function FoodTable() {
 
               <BodyCell>
                 <Actions>
-                  <DeleteBtn size="small" onClick={() => deleteFood(food.id)}>
-                    <img src={deleteIcon} alt="Delete" />
+                  <DeleteBtn onClick={() => deleteFood(food.id)}>
+                    <img src={deleteIcon} alt="delete" />
                   </DeleteBtn>
 
-                  <EditBtn size="small">
-                    <img src={editIcon} alt="Edit" />
+                  <EditBtn>
+                    <img src={editIcon} alt="edit" />
                   </EditBtn>
                 </Actions>
               </BodyCell>
@@ -220,7 +159,7 @@ const StatusText = styled(Typography)(({ instock }) => ({
   fontSize: 13,
   fontWeight: 500,
   cursor: 'pointer',
-  color: instock === 'true' ? '#27ae60' : '#e67e00',
+  color: instock ? '#27ae60' : '#e67e00',
 }))
 
 const CompositionBtn = styled(Box)({
