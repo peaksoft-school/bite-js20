@@ -1,24 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react'
-import { Box, Typography, IconButton } from '@mui/material'
-import { styled } from '@mui/material/styles'
-
+import { useState, useRef, useEffect } from 'react'
+import { Box, Typography, IconButton, styled } from '@mui/material'
 import { RightArrowIcon, LeftArrowIcon } from '../../assets/icons'
 
 const weekDays = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс']
-
-const getDaysInMonth = (year, month) => new Date(year, month + 1, 0).getDate()
-
-const getFirstDay = (year, month) => {
-  let day = new Date(year, month, 1).getDay()
-  return day === 0 ? 6 : day - 1
-}
-
-const formatDate = (date) => {
-  const d = String(date.getDate()).padStart(2, '0')
-  const m = String(date.getMonth() + 1).padStart(2, '0')
-  const y = date.getFullYear()
-  return `${d}.${m}.${y}`
-}
 
 export const DatePicker = () => {
   const today = new Date()
@@ -27,65 +11,43 @@ export const DatePicker = () => {
   const [selected, setSelected] = useState(today)
   const [current, setCurrent] = useState(today)
 
-  const ref = useRef()
+  const ref = useRef(null)
 
   useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (ref.current && !ref.current.contains(e.target)) {
-        setOpen(false)
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
+    const close = (e) => !ref.current?.contains(e.target) && setOpen(false)
+
+    document.addEventListener('mousedown', close)
+
+    return () => document.removeEventListener('mousedown', close)
   }, [])
 
-  const year = current.getFullYear()
-  const month = current.getMonth()
+  const y = current.getFullYear()
+  const m = current.getMonth()
 
-  const daysInMonth = getDaysInMonth(year, month)
-  const firstDay = getFirstDay(year, month)
+  const days = new Date(y, m + 1, 0).getDate()
+  const start = (new Date(y, m, 1).getDay() + 6) % 7
 
-  const isFuture = (day) => {
-    const d = new Date(year, month, day)
-    return d > today
-  }
-
-  const handleSelect = (day) => {
-    if (isFuture(day)) return
-
-    const newDate = new Date(year, month, day)
-    setSelected(newDate)
-
-    setOpen(false)
-  }
-
-  const prevMonth = () => {
-    setCurrent(new Date(year, month - 1, 1))
-  }
-
-  const nextMonth = () => {
-    setCurrent(new Date(year, month + 1, 1))
-  }
-
-  const monthName = current.toLocaleString('ru', { month: 'long' })
+  const isFuture = (d) => new Date(y, m, d) > today
 
   return (
     <StyleWrapper ref={ref}>
-      <StyleInput onClick={() => setOpen(!open)}>{`[ ${formatDate(selected)} ]`}</StyleInput>
+      <StyleInput onClick={() => setOpen((p) => !p)}>
+        {`[ ${selected.toLocaleDateString('ru-RU')} ]`}
+      </StyleInput>
 
       {open && (
         <StyleCalendar>
           <StyleHeader>
-            <IconButton onClick={prevMonth}>
-              <Box component={'img'} src={LeftArrowIcon} fontSize="small" />
+            <IconButton onClick={() => setCurrent(new Date(y, m - 1, 1))}>
+              <img src={LeftArrowIcon} />
             </IconButton>
 
             <Typography>
-              {monthName} {year}
+              {current.toLocaleString('ru', { month: 'long' })} {y}
             </Typography>
 
-            <IconButton onClick={nextMonth}>
-              <Box component={'img'} src={RightArrowIcon} fontSize="small" />
+            <IconButton onClick={() => setCurrent(new Date(y, m + 1, 1))}>
+              <img src={RightArrowIcon} />
             </IconButton>
           </StyleHeader>
 
@@ -96,27 +58,28 @@ export const DatePicker = () => {
           </StyleWeekRow>
 
           <StyleGrid>
-            {[...Array(firstDay)].map((_, i) => (
+            {Array.from({ length: start }).map((_, i) => (
               <StyleEmpty key={i} />
             ))}
 
-            {[...Array(daysInMonth)].map((_, i) => {
-              const day = i + 1
-              const disabled = isFuture(day)
+            {Array.from({ length: days }, (_, i) => {
+              const d = i + 1
 
-              const isSelected =
-                selected.getDate() === day &&
-                selected.getMonth() === month &&
-                selected.getFullYear() === year
+              const selectedDay =
+                selected.getDate() === d &&
+                selected.getMonth() === m &&
+                selected.getFullYear() === y
+
+              const disabled = isFuture(d)
 
               return (
                 <StyleDay
-                  key={day}
-                  disabled={disabled ? 1 : 0}
-                  selected={isSelected ? 1 : 0}
-                  onClick={() => handleSelect(day)}
+                  key={d}
+                  selected={selectedDay}
+                  disabled={disabled}
+                  onClick={() => !disabled && (setSelected(new Date(y, m, d)), setOpen(false))}
                 >
-                  {day}
+                  {d}
                 </StyleDay>
               )
             })}
@@ -161,15 +124,13 @@ const StyleHeader = styled(Box)({
 
 const StyleWeekRow = styled(Box)({
   height: '32px',
-  paddingLeft: '16px',
-  paddingRight: '16px',
+  padding: '0 16px',
   display: 'grid',
   gridTemplateColumns: 'repeat(7, 1fr)',
 })
 
 const StyleWeekDay = styled(Typography)({
   color: '#00000099',
-  fontWeight: '400px',
   fontSize: '12px',
   textAlign: 'center',
 })
@@ -178,7 +139,7 @@ const StyleGrid = styled(Box)({
   display: 'grid',
   gridTemplateColumns: 'repeat(7, 1fr)',
   height: '210px',
-  padding: '0px 16px 8px 16px',
+  padding: '0 16px 8px',
 })
 
 const StyleEmpty = styled(Box)({
@@ -188,17 +149,15 @@ const StyleEmpty = styled(Box)({
 const StyleDay = styled(Box)(({ selected, disabled }) => ({
   height: '32px',
   width: '32px',
-  fontSize: '14px',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   borderRadius: '50%',
   cursor: disabled ? 'default' : 'pointer',
-  marginBottom: '2px',
 
   ...(selected && {
     backgroundColor: '#dc8a08',
-    color: '#FFFFFF',
+    color: '#fff',
   }),
 
   '&:hover': {
