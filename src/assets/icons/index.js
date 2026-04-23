@@ -11,6 +11,7 @@ import CardIcon from './svgs/card.svg'
 import CategoriesIcon from './svgs/categories.svg'
 import CheckedYellowIcon from './svgs/checked-yellow.svg'
 import CleanBasketIcon from './svgs/clean-basket.svg'
+import CloseOutline from './svgs/close-outline.svg'
 import DishesIcon from './svgs/dishes.svg'
 import EmptyBasketIcon from './svgs/empty-basket.svg'
 import EmptyCheckIcon from './svgs/empty-check.svg'
@@ -42,7 +43,7 @@ import PresentIcon from './svgs/present.svg'
 import ReviewsIcon from './svgs/reviews.svg'
 import RightArrowIcon from './svgs/right-arrow.svg'
 import SettingsIcon from './svgs/settings.svg'
-import StarIcon from './svgs/star.svg'
+import StarIcon from './svgs/star-icon.svg'
 import TimeIcon from './svgs/time.svg'
 import UserIcon from './svgs/user.svg'
 import WhiteStarIcon from './svgs/white-star.svg'
@@ -67,6 +68,7 @@ export {
   CategoriesIcon,
   CheckedYellowIcon,
   CleanBasketIcon,
+  CloseOutline,
   DishesIcon,
   EmptyBasketIcon,
   EmptyCheckIcon,
