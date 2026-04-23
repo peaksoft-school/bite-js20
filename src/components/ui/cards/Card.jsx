@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { NoteIcon, SaveFillIcon, BagIcon } from '../../assets/icons'
+import { NoteIcon, SaveFillIcon, BagIcon } from '../../../assets/icons'
 import { styled, Typography, Box, ButtonBase } from '@mui/material'
 
 export const Card = ({ data }) => {
