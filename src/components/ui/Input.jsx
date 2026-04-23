@@ -1,37 +1,40 @@
 import { InputBase, styled, Typography } from '@mui/material'
+import { forwardRef } from 'react'
 
-export const Input = ({
-  id,
-  type = 'text',
-  placeholder,
-  label,
-  error,
-  helperText,
-  disabled,
-  value,
-  onChange,
-  ...props
-}) => (
-  <div>
-    {label && <label htmlFor={id}>{label}</label>}
+export const Input = forwardRef(
+  ({
+    id,
+    type = 'text',
+    placeholder,
+    label,
+    error,
+    helperText,
+    disabled,
+    value,
+    onChange,
+    ...props
+  }) => (
+    <div>
+      {label && <label htmlFor={id}>{label}</label>}
 
-    <StyledInput
-      id={id}
-      type={type}
-      placeholder={placeholder}
-      error={error}
-      disabled={disabled}
-      value={value}
-      onChange={onChange}
-      {...props}
-    />
+      <StyledInput
+        id={id}
+        type={type}
+        placeholder={placeholder}
+        error={error}
+        disabled={disabled}
+        value={value}
+        onChange={onChange}
+        {...props}
+      />
 
-    {helperText && (
-      <HelperText component="span" isError={error}>
-        {helperText}
-      </HelperText>
-    )}
-  </div>
+      {helperText && (
+        <HelperText component="span" isError={error}>
+          {helperText}
+        </HelperText>
+      )}
+    </div>
+  )
 )
 
 const StyledInput = styled(InputBase)(({ theme }) => {
