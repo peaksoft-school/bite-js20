@@ -7,42 +7,14 @@ import {
   styled,
   Box,
 } from '@mui/material'
+import AddIcon from '@mui/icons-material/Add'
+import CloseIcon from '@mui/icons-material/Close'
+import { PARTNERS_QUESTIONS } from '../utils/constants'
 
-const faqData = [
-  {
-    id: 1,
-    question: 'Кто может стать партнером?',
-    answer:
-      'Партнёром может стать зарегистрированное заведение общественного питания: ресторан, кафе, кофейня, пекарня или dark kitchen.',
-  },
-  {
-    id: 2,
-    question: 'Нужно ли зарегистрированный бизнес?',
-    answer: 'Да, необходимо быть ИП или юридическим лицом для заключения договора.',
-  },
-  {
-    id: 3,
-    question: 'Как проходит процесс подключения?',
-    answer: 'Вы отправляете заявку, проходит модерация и получаете доступ.',
-  },
-  {
-    id: 4,
-    question: 'Сколько стоит размещение?',
-    answer: 'Комиссия обсуждается индивидуально.',
-  },
-  {
-    id: 5,
-    question: 'Как проходят выплаты?',
-    answer: 'Деньги поступают через платформу с удержанием комиссии.',
-  },
-]
-
-export const PartnersPage = () => {
+export const Partners = () => {
   const [expanded, setExpanded] = useState(false)
 
-  const handleChange = (panel) => (_, isExpanded) => {
-    setExpanded(isExpanded ? panel : false)
-  }
+  const handleChange = (panel) => (_, isExpanded) => setExpanded(isExpanded ? panel : false)
 
   return (
     <StyledWrapper>
@@ -58,20 +30,18 @@ export const PartnersPage = () => {
         управлению заказами.
       </StyledDescription>
 
-      {faqData.map((item) => (
-        <StyledAccordion
-          key={item.id}
-          expanded={expanded === item.id}
-          onChange={handleChange(item.id)}
-        >
-          <StyledSummary>
+      {PARTNERS_QUESTIONS.map(({ id, question, answer }, i) => (
+        <StyledAccordion key={id} expanded={expanded === id} onChange={handleChange(id)}>
+          <StyledSummary
+            expandIcon={expanded === id ? <CloseIcon color="black" /> : <AddIcon color="black" />}
+          >
             <StyledQuestionText>
-              {item.id}. {item.question}
+              {i + 1}. {question}
             </StyledQuestionText>
           </StyledSummary>
 
           <AccordionDetails sx={{ p: 0 }}>
-            <StyledAnswerText>{item.answer}</StyledAnswerText>
+            <StyledAnswerText>{answer}</StyledAnswerText>
           </AccordionDetails>
         </StyledAccordion>
       ))}
@@ -82,8 +52,7 @@ export const PartnersPage = () => {
 const StyledWrapper = styled(Box)(({ theme }) => ({
   marginTop: theme.spacing(6),
   marginBottom: theme.spacing(6),
-  paddingLeft: '30px',
-  maxWidth: '800px',
+  padding: '0 30px',
 }))
 
 const StyledTitle = styled(Typography)(({ theme }) => ({
@@ -100,14 +69,22 @@ const StyledDescription = styled(Typography)(({ theme }) => ({
 const StyledAccordion = styled(Accordion)(() => ({
   boxShadow: 'none',
   borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
+
   '&:before': { display: 'none' },
 }))
 
 const StyledSummary = styled(AccordionSummary)(() => ({
   padding: 0,
   cursor: 'pointer',
+  display: 'flex',
+  justifyContent: 'space-between',
+
   '& .MuiAccordionSummary-content': {
     margin: '16px 0',
+  },
+
+  '& .MuiAccordionSummary-expandIconWrapper': {
+    marginRight: 0,
   },
 }))
 

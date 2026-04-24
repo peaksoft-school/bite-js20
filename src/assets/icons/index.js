@@ -1,7 +1,8 @@
 import AboutIcon from './svgs/about.svg'
-import AddImageIcon from './svgs/add-Image.svg'
+import AddImageIcon from './svgs/add-image.svg'
 import AppleIcon from './svgs/apple.svg'
 import AttentionIcon from './svgs/attention.svg'
+import ArrowDownIcon from './svgs/arrow-down.svg'
 import BagIcon from './svgs/bag.svg'
 import BannersIcon from './svgs/banners.svg'
 import BasketIcon from './svgs/basket.svg'
@@ -47,12 +48,17 @@ import UserIcon from './svgs/user.svg'
 import WhiteStarIcon from './svgs/white-star.svg'
 import WorldIcon from './svgs/world.svg'
 import YoutubeIcon from './svgs/youtube.svg'
+import IconamoonIcon from './svgs/iconamoon_discount-fill.svg'
+import AvatarIcon from './svgs/avatar.svg'
 
 export {
+  AvatarIcon,
+  IconamoonIcon,
   AboutIcon,
   AddImageIcon,
   AppleIcon,
   AttentionIcon,
+  ArrowDownIcon,
   BagIcon,
   BannersIcon,
   BasketIcon,
