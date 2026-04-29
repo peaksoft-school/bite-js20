@@ -23,7 +23,6 @@ export const Modal = () => {
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
   const handleSubmit = () => {
-    console.log({ rating, comment })
     handleClose()
   }
 
