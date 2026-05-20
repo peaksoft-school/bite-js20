@@ -1,3 +1,4 @@
+import { useGoogleLogin } from '@react-oauth/google'
 import { GoogleIcon } from '../../assets/icons'
 import { useForm } from 'react-hook-form'
 import {
@@ -19,6 +20,13 @@ export const LoginForm = () => {
   const submitHandler = (data) => {
     console.log(data) // я оставил это чтобы зоглушил ошибку до соеднение сервером (API)
   }
+
+  const handleGoogleLogin = useGoogleLogin({
+    onSuccess: (response) => {
+      console.log('Google токен:', response)
+    },
+    onError: () => console.log('Ошибка входа через Google'),
+  })
 
   return (
     <StyledForm onSubmit={handleSubmit(submitHandler)}>
@@ -58,7 +66,7 @@ export const LoginForm = () => {
         />
       </StyledInputWrapper>
 
-      <StyledGoogle>
+      <StyledGoogle onClick={handleGoogleLogin}>
         <img src={GoogleIcon} alt="Google" />
       </StyledGoogle>
 
