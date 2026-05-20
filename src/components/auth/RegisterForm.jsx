@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form'
+import { useGoogleLogin } from '@react-oauth/google'
 import { GoogleIcon } from '../../assets/icons'
 import {
   StyledForm,
@@ -18,6 +19,13 @@ export const RegisterForm = () => {
   const submitHandler = (data) => {
     console.log(data) // я оставил это чтобы зоглушил ошибку до соеднение сервером (API)
   }
+
+  const handleGoogleRegister = useGoogleLogin({
+    onSuccess: (response) => {
+      console.log('Google токен:', response)
+    },
+    onError: () => console.log('Ошибка регистрации через Google'),
+  })
 
   return (
     <StyledForm onSubmit={handleSubmit(submitHandler)}>
@@ -92,7 +100,7 @@ export const RegisterForm = () => {
         />
       </StyledInputWrapper>
 
-      <StyledGoogle>
+      <StyledGoogle onClick={handleGoogleRegister}>
         <img src={GoogleIcon} alt="Google" />
       </StyledGoogle>
 
