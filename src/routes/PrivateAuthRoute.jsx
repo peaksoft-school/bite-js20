@@ -1,15 +1,15 @@
-import { Navigate, Outlet } from 'react-router';
+import { Navigate, Outlet } from 'react-router'
 
 export const PrivateAuthRoute = ({ roles, element, fallbackPath = '/login' }) => {
-  const role = 'GUEST';
+  const role = 'GUEST'
 
-  const allowedRoles = Array.isArray(roles) ? roles : [roles];
+  const allowedRoles = Array.isArray(roles) ? roles : [roles]
 
-  const isAllowed = allowedRoles.includes(role);
+  const isAllowed = allowedRoles.includes(role)
 
   if (!isAllowed) {
-    return <Navigate to={fallbackPath} replace />;
+    return <Navigate to={fallbackPath} replace />
   }
 
-  return element ?? <Outlet />;
-};
+  return element ?? <Outlet />
+}

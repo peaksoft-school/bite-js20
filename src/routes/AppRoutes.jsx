@@ -1,5 +1,5 @@
-import { RouterProvider } from 'react-router'
-import { createBrowserRouter } from 'react-router'
+import { RouterProvider } from 'react-router-dom'
+import { createBrowserRouter } from 'react-router-dom'
 import { PrivateAuthRoute } from './PrivateAuthRoute'
 import { userRoute } from './user/userRoute'
 import { adminRoute } from './admin/adminRoute'
