@@ -69,6 +69,7 @@ export const Sidebar = ({ role = 'admin', active, onChange, props }) => {
 }
 
 const StyleSidebarWrapper = styled(Box)({
+  position: 'fixed',
   width: '280px',
   height: '100vh',
   backgroundColor: '#F5F4F2',
