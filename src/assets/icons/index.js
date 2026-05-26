@@ -48,8 +48,12 @@ import UserIcon from './svgs/user.svg'
 import WhiteStarIcon from './svgs/white-star.svg'
 import WorldIcon from './svgs/world.svg'
 import YoutubeIcon from './svgs/youtube.svg'
+import IconamoonIcon from './svgs/iconamoon_discount-fill.svg'
+import AvatarIcon from './svgs/avatar.svg'
 
 export {
+  AvatarIcon,
+  IconamoonIcon,
   AboutIcon,
   AddImageIcon,
   AppleIcon,
